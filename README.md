@@ -13,7 +13,8 @@
 
 [**Open Locally**](index.html) · [Report Bug](https://github.com/braedonsaunders/DecodeTheCode/issues) · [Request Feature](https://github.com/braedonsaunders/DecodeTheCode/issues)
 
-<img src="./screenshot.png" alt="DecodeTheCode Screenshot" width="100%"/>
+<img width="2100" height="4096" alt="diagram" src="https://github.com/user-attachments/assets/2d59819f-f951-4704-92d8-324bea99b84e" alt="DecodeTheCode Screenshot" width="100%"/>
+ 
 
 </div>
 
