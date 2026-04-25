@@ -1,6 +1,6 @@
 <div align="center">
 
-# CodeFlow
+# DecodeTheCode
 
 ### Visualize Your Codebase Architecture in Seconds
 
@@ -11,17 +11,17 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
 
-[**Open Locally**](index.html) · [Report Bug](https://github.com/braedonsaunders/codeflow/issues) · [Request Feature](https://github.com/braedonsaunders/codeflow/issues)
+[**Open Locally**](index.html) · [Report Bug](https://github.com/braedonsaunders/DecodeTheCode/issues) · [Request Feature](https://github.com/braedonsaunders/DecodeTheCode/issues)
 
-<img src="./screenshot.png" alt="CodeFlow Screenshot" width="100%"/>
+<img src="./screenshot.png" alt="DecodeTheCode Screenshot" width="100%"/>
 
 </div>
 
 ---
 
-## Why CodeFlow?
+## Why DecodeTheCode?
 
-Ever opened a new codebase and felt completely lost? **CodeFlow** turns any GitHub repository or local codebase into an interactive architecture map in seconds.
+Ever opened a new codebase and felt completely lost? **DecodeTheCode** turns any GitHub repository or local codebase into an interactive architecture map in seconds.
 
 - **No installation required** — runs entirely in your browser
 - **No data collection** — your code never leaves your machine
@@ -40,7 +40,7 @@ Paste URL / Select Files -> See Architecture -> Make Better Decisions
 See how your files connect at a glance. Click any node to highlight its dependencies. Drag, zoom, and explore.
 
 ### Blast Radius Analysis
-*"If I change this file, what breaks?"* — CodeFlow answers this instantly. Select any file and see exactly how many files would be affected by changes.
+*"If I change this file, what breaks?"* — DecodeTheCode answers this instantly. Select any file and see exactly how many files would be affected by changes.
 
 ### Code Ownership
 Know who owns what. See the top contributors for any file based on git history. Perfect for code reviews and knowing who to ask.
@@ -74,7 +74,7 @@ Color files by commit frequency to see which parts of your codebase are most act
 Paste a PR URL to see exactly which files it affects and calculate the blast radius of proposed changes.
 
 ### Markdown & Wiki-Link Graph
-Point CodeFlow at an Obsidian vault or any markdown directory to see notes as a connected graph. Both `[[wiki-links]]` and `[text](./relative.md)` links become edges; each note is a `note`-layer node (distinct color) with a `dependencies[]` array in the JSON export.
+Point DecodeTheCode at an Obsidian vault or any markdown directory to see notes as a connected graph. Both `[[wiki-links]]` and `[text](./relative.md)` links become edges; each note is a `note`-layer node (distinct color) with a `dependencies[]` array in the JSON export.
 
 ### Local File Analysis
 Analyze code directly from your computer without uploading to GitHub:
@@ -89,7 +89,7 @@ Analyze code directly from your computer without uploading to GitHub:
 
 ## Privacy First
 
-**Your code stays on your machine.** CodeFlow:
+**Your code stays on your machine.** DecodeTheCode:
 
 - Runs 100% in the browser
 - Makes API calls directly from your browser to GitHub
@@ -109,7 +109,7 @@ Open `index.html` directly in your browser or serve this folder from any static 
 ### Option 2: Self-Host
 ```bash
 # Clone the repo
-git clone https://github.com/braedonsaunders/codeflow.git
+git clone https://github.com/bharadwajsanket/DecodeTheCode.git
 
 # Open the app locally
 open index.html
@@ -120,10 +120,10 @@ No build process. No npm install. It is a single `index.html` app that loads pin
 ### Option 3: Analyze Local Files
 You can now analyze code directly from your local machine without uploading to GitHub:
 
-1. Open CodeFlow in your browser
+1. Open DecodeTheCode in your browser
 2. Click the "Open Folder" button
 3. Select the folder or files you want to analyze
-4. CodeFlow will process them entirely in your browser
+4. DecodeTheCode will process them entirely in your browser
 
 **Perfect for:**
 - Private projects you don't want to upload
@@ -183,7 +183,7 @@ Click the "Export" button in the top bar after analysis to access all export opt
 
 ## Supported Languages
 
-CodeFlow extracts functions and analyzes dependencies for:
+DecodeTheCode extracts functions and analyzes dependencies for:
 
 | Language | Extensions |
 |----------|------------|
@@ -281,7 +281,7 @@ For larger repositories or team usage, we recommend using GitHub App authenticat
 
 ```
 ┌─────────────────────────────────────────────────┐
-│                   CodeFlow                      │
+│                   DecodeTheCode                      │
 ├─────────────────────────────────────────────────┤
 │  ┌──────────┐  ┌──────────┐  ┌──────────┐       │
 │  │  Parser  │  │  GitHub  │  │    D3    │       │
@@ -333,7 +333,7 @@ node --test tests/
 ## FAQ
 
 **Q: How does it work without a backend?**
-> CodeFlow runs entirely in your browser. It calls the GitHub API directly from your browser and processes everything client-side.
+> DecodeTheCode runs entirely in your browser. It calls the GitHub API directly from your browser and processes everything client-side.
 
 **Q: Is my code safe?**
 > Yes. Your code is fetched directly from GitHub to your browser. Nothing is sent to any server we control. Check the source — it's one file!
@@ -351,7 +351,7 @@ node --test tests/
 
 ## Star History
 
-If you find CodeFlow useful, please star the repo.
+If you find DecodeTheCode useful, please star the repo.
 
 ---
 
