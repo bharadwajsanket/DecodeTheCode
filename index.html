@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CodeFlow — Architecture Intelligence by Sanket Bharadwaj</title>
+    <title>DecodeTheCode — Architecture Intelligence by Sanket Bharadwaj</title>
     <meta name="description" content="Visualize any GitHub repository's architecture in seconds. See dependencies, blast radius, code ownership, security issues, and design patterns. No installation required.">
     <meta name="keywords" content="code visualization, architecture, github, dependency graph, blast radius, code analysis, open source">
     <meta name="author" content="Sanket Bharadwaj">
-    <meta property="og:site_name" content="CodeFlow by Sanket Bharadwaj">
+    <meta property="og:site_name" content="DecodeTheCode by Sanket Bharadwaj">
     <meta name="robots" content="index, follow">
-    <meta property="og:title" content="CodeFlow — Visualize Your Codebase Architecture">
+    <meta property="og:title" content="DecodeTheCode — Visualize Your Codebase Architecture">
     <meta property="og:description" content="Turn any GitHub repo into an interactive architecture map in seconds. Zero setup, privacy-first, runs in your browser.">
     <meta property="og:type" content="website">
-    <meta property="og:image" content="codeflow-social.png">
+    <meta property="og:image" content="DecodeTheCode-social.png">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="CodeFlow — Visualize Your Codebase Architecture">
+    <meta name="twitter:title" content="DecodeTheCode — Visualize Your Codebase Architecture">
     <meta name="twitter:description" content="Turn any GitHub repo into an interactive architecture map in seconds. Zero setup, privacy-first.">
-    <meta name="twitter:image" content="codeflow-social.png">
+    <meta name="twitter:image" content="DecodeTheCode-social.png">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%237c6af7'/><stop offset='100%25' stop-color='%235b8dee'/></linearGradient></defs><rect width='32' height='32' rx='9' fill='%230c0c0e'/><circle cx='9' cy='23' r='3.2' fill='url(%23g)'/><circle cx='16' cy='8' r='3.2' fill='url(%23g)'/><circle cx='24' cy='19' r='3.2' fill='url(%23g)'/><line x1='9' y1='23' x2='16' y2='8' stroke='%237c6af7' stroke-width='1.8' stroke-opacity='0.7' stroke-linecap='round'/><line x1='16' y1='8' x2='24' y2='19' stroke='%235b8dee' stroke-width='1.8' stroke-opacity='0.7' stroke-linecap='round'/><line x1='9' y1='23' x2='24' y2='19' stroke='%237c6af7' stroke-width='1.5' stroke-opacity='0.4' stroke-linecap='round'/></svg>">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js" integrity="sha512-8Q6Y9XnTbOE+JNvjBQwJ2H8S+UV4uA6hiRykhdtIyDYZ2TprdNmWOUaKdGzOhyr4dCyk287OejbPvwl7lrfqrQ==" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js" integrity="sha512-MOCpqoRoisCTwJ8vQQiciZv0qcpROCidek3GTFS6KTk2+y7munJIlKCVkFCYY+p3ErYFXCjmFjnfTTRSC1OHWQ==" crossorigin="anonymous"></script>
@@ -1277,7 +1277,7 @@ button,a,.view-mode,.tree-folder,.tree-file,.card-header,.top-btn,.tool-btn,.sta
 <div id="root"></div>
 <script type="text/babel">
 /*
- * CodeFlow is intentionally shipped as one HTML file.
+ * DecodeTheCode is intentionally shipped as one HTML file.
  *
  * The file is organized in five broad sections:
  * 1. Shared constants, exclusion helpers, and browser-yield utilities.
@@ -4463,13 +4463,13 @@ function getDialogTone(tone){
 class ErrorBoundary extends React.Component{
     constructor(props){super(props);this.state={hasError:false,error:null};}
     static getDerivedStateFromError(error){return{hasError:true,error:error};}
-    componentDidCatch(error,info){console.error('CodeFlow crashed:',error,info);}
+    componentDidCatch(error,info){console.error('DecodeTheCode crashed:',error,info);}
     render(){
         if(this.state.hasError){
             var self=this;
             return React.createElement('div',{style:{display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',height:'100vh',background:'var(--bg0)',color:'var(--t0)',fontFamily:'JetBrains Mono, monospace',padding:40,textAlign:'center'}},
                 React.createElement(Icon,{name:'flow',size:'xxl',className:'empty-icon'}),
-                React.createElement('h2',{style:{marginBottom:12,color:'var(--acc)'}},'CodeFlow ran into an issue'),
+                React.createElement('h2',{style:{marginBottom:12,color:'var(--acc)'}},'DecodeTheCode ran into an issue'),
                 React.createElement('p',{style:{color:'var(--t2)',marginBottom:8,maxWidth:500}},'The codebase may be too large for your browser\'s available memory. Try analyzing a subfolder instead, or close other browser tabs to free memory.'),
                 React.createElement('p',{style:{color:'var(--t3)',fontSize:11,marginBottom:20}},String(this.state.error)),
                 React.createElement('button',{onClick:function(){self.setState({hasError:false,error:null});},style:{padding:'8px 20px',background:'var(--acc)',color:'var(--bg0)',border:'none',borderRadius:6,cursor:'pointer',fontFamily:'inherit',fontWeight:600}},'Reload')
@@ -5015,7 +5015,7 @@ function App(){
                     message:
                         'This GitHub repository has '+files.length+' analyzable files.\n\n'+
                         'The browser cannot read GitHub zipball archives directly because GitHub redirects archive downloads to a CORS-restricted host.\n\n'+
-                        'For full analysis: download the repository ZIP from GitHub, then use Open ZIP in CodeFlow.\n\n'+
+                        'For full analysis: download the repository ZIP from GitHub, then use Open ZIP in DecodeTheCode.\n\n'+
                         'Continue now with a '+HARD_LIMIT+'-file API sample?',
                     confirmLabel:'Analyze sample'
                 }).then(function(proceed){
@@ -5144,7 +5144,7 @@ function App(){
                 title:'Analyze '+fileCount+' files?',
                 message:
                     'This folder has '+fileCount+' analyzable files.\n\n'+
-                    'CodeFlow will analyze every eligible file. Large folders can take minutes and use significant browser memory.\n\n'+
+                    'DecodeTheCode will analyze every eligible file. Large folders can take minutes and use significant browser memory.\n\n'+
                     'Continue with all '+fileCount+' files?',
                 confirmLabel:'Analyze all files'
             });
@@ -5261,7 +5261,7 @@ function App(){
                     title:'Analyze '+fileCount+' files?',
                     message:
                         'This ZIP archive has '+fileCount+' analyzable files.\n\n'+
-                        'CodeFlow will analyze every eligible file. Large archives can take minutes and use significant browser memory.\n\n'+
+                        'DecodeTheCode will analyze every eligible file. Large archives can take minutes and use significant browser memory.\n\n'+
                         'Continue with all '+fileCount+' files?',
                     confirmLabel:'Analyze all files'
                 });
@@ -6184,8 +6184,8 @@ function App(){
         var scale=0.8/Math.max((maxX-minX+100)/w,(maxY-minY+100)/h);
         d3.select(svgRef.current).transition().duration(400).call(zoomRef.current.transform,d3.zoomIdentity.translate(w/2-scale*(minX+maxX)/2,h/2-scale*(minY+maxY)/2).scale(Math.min(scale,2)));
     }
-    function exportSVG(){if(!svgRef.current)return;var svgClone=svgRef.current.cloneNode(true);svgClone.setAttribute('xmlns','http://www.w3.org/2000/svg');svgClone.setAttribute('width',svgRef.current.clientWidth);svgClone.setAttribute('height',svgRef.current.clientHeight);var style=document.createElementNS('http://www.w3.org/2000/svg','style');style.textContent='text{font-family:JetBrains Mono,monospace;pointer-events:none}';svgClone.insertBefore(style,svgClone.firstChild);var blob=new Blob([new XMLSerializer().serializeToString(svgClone)],{type:'image/svg+xml'});var url=URL.createObjectURL(blob);var a=document.createElement('a');a.href=url;a.download='codeflow-'+Date.now()+'.svg';a.click();URL.revokeObjectURL(url);}
-    function exportJSON(){if(!data)return;var blob=new Blob([JSON.stringify({stats:data.stats,files:data.files.map(function(f){return{path:f.path,fns:f.functions.length,layer:f.layer,lines:f.lines,dependencies:f.dependencies||[]};}),connections:data.connections,issues:data.issues,patterns:data.patterns,security:data.securityIssues},null,2)],{type:'application/json'});var url=URL.createObjectURL(blob);var a=document.createElement('a');a.href=url;a.download='codeflow-analysis.json';a.click();}
+    function exportSVG(){if(!svgRef.current)return;var svgClone=svgRef.current.cloneNode(true);svgClone.setAttribute('xmlns','http://www.w3.org/2000/svg');svgClone.setAttribute('width',svgRef.current.clientWidth);svgClone.setAttribute('height',svgRef.current.clientHeight);var style=document.createElementNS('http://www.w3.org/2000/svg','style');style.textContent='text{font-family:JetBrains Mono,monospace;pointer-events:none}';svgClone.insertBefore(style,svgClone.firstChild);var blob=new Blob([new XMLSerializer().serializeToString(svgClone)],{type:'image/svg+xml'});var url=URL.createObjectURL(blob);var a=document.createElement('a');a.href=url;a.download='DecodeTheCode-'+Date.now()+'.svg';a.click();URL.revokeObjectURL(url);}
+    function exportJSON(){if(!data)return;var blob=new Blob([JSON.stringify({stats:data.stats,files:data.files.map(function(f){return{path:f.path,fns:f.functions.length,layer:f.layer,lines:f.lines,dependencies:f.dependencies||[]};}),connections:data.connections,issues:data.issues,patterns:data.patterns,security:data.securityIssues},null,2)],{type:'application/json'});var url=URL.createObjectURL(blob);var a=document.createElement('a');a.href=url;a.download='DecodeTheCode-analysis.json';a.click();}
     function getAnalysisSourceLabel(){
         if(localSourceKind==='folder')return'Local Folder';
         if(localSourceKind==='zip')return repoInfo&&repoInfo.name?repoInfo.name:'ZIP Archive';
@@ -6198,7 +6198,7 @@ function App(){
         var report={
             repository:repo,
             analyzedAt:new Date().toISOString(),
-            codeflowVersion:'1.0',
+            DecodeTheCodeVersion:'1.0',
             summary:{
                 healthScore:h.score,
                 healthGrade:h.grade,
@@ -6278,9 +6278,9 @@ function App(){
         };
         if(format==='json'){
             var blob=new Blob([JSON.stringify(report,null,2)],{type:'application/json'});
-            var url=URL.createObjectURL(blob);var a=document.createElement('a');a.href=url;a.download='codeflow-report.json';a.click();URL.revokeObjectURL(url);
+            var url=URL.createObjectURL(blob);var a=document.createElement('a');a.href=url;a.download='DecodeTheCode-report.json';a.click();URL.revokeObjectURL(url);
         }else if(format==='md'){
-            var md='# CodeFlow Analysis Report\n\n';
+            var md='# DecodeTheCode Analysis Report\n\n';
             md+='**Repository:** '+repo+'\n';
             md+='**Analyzed:** '+new Date().toLocaleString()+'\n\n';
             md+='## Summary\n\n';
@@ -6348,9 +6348,9 @@ function App(){
             });
             if(data.files.length>100)md+='\n*...and '+(data.files.length-100)+' more files*\n';
             var blob=new Blob([md],{type:'text/markdown'});
-            var url=URL.createObjectURL(blob);var a=document.createElement('a');a.href=url;a.download='codeflow-report.md';a.click();URL.revokeObjectURL(url);
+            var url=URL.createObjectURL(blob);var a=document.createElement('a');a.href=url;a.download='DecodeTheCode-report.md';a.click();URL.revokeObjectURL(url);
         }else if(format==='txt'){
-            var txt='CODEFLOW ANALYSIS REPORT\n';
+            var txt='DecodeTheCode ANALYSIS REPORT\n';
             txt+='========================\n\n';
             txt+='Repository: '+repo+'\n';
             txt+='Analyzed: '+new Date().toLocaleString()+'\n\n';
@@ -6412,7 +6412,7 @@ function App(){
             });
             if(data.connections.length>100)txt+='\n...and '+(data.connections.length-100)+' more dependencies\n';
             var blob=new Blob([txt],{type:'text/plain'});
-            var url=URL.createObjectURL(blob);var a=document.createElement('a');a.href=url;a.download='codeflow-report.txt';a.click();URL.revokeObjectURL(url);
+            var url=URL.createObjectURL(blob);var a=document.createElement('a');a.href=url;a.download='DecodeTheCode-report.txt';a.click();URL.revokeObjectURL(url);
         }
         showNotification('Report exported as '+format.toUpperCase(),'success');
     }
@@ -6629,7 +6629,7 @@ function App(){
                         )
                     ),
                         React.createElement('div',{style:{display:'flex',flexDirection:'column',lineHeight:'1'}},
-                            React.createElement('span',{className:'logo-text'},'CODEFLOW'),
+                            React.createElement('span',{className:'logo-text'},'DecodeTheCode'),
                             React.createElement('span',{className:'logo-subtitle'},'Architecture Intelligence')
                         )
                     ),
@@ -6700,7 +6700,7 @@ function App(){
                         )
                     ),
                 React.createElement('div',{style:{display:'flex',flexDirection:'column',lineHeight:'1'}},
-                    React.createElement('span',{className:'logo-text'},'CODEFLOW'),
+                    React.createElement('span',{className:'logo-text'},'DecodeTheCode'),
                     React.createElement('span',{className:'logo-subtitle'},'Architecture Intelligence')
                 )
             ),
@@ -7654,7 +7654,7 @@ function App(){
                 React.createElement('div',{className:'modal-body'},
                     React.createElement('div',{className:'privacy-item'},
                         React.createElement('div',{className:'privacy-icon'},React.createElement(Icon,{name:'globe',size:'l'})),
-                        React.createElement('div',null,React.createElement('div',{className:'privacy-title'},'100% Browser-Based'),React.createElement('div',{className:'privacy-text'},'CodeFlow runs entirely in your browser. No backend servers, no data collection.'))
+                        React.createElement('div',null,React.createElement('div',{className:'privacy-title'},'100% Browser-Based'),React.createElement('div',{className:'privacy-text'},'DecodeTheCode runs entirely in your browser. No backend servers, no data collection.'))
                     ),
                     React.createElement('div',{className:'privacy-item'},
                         React.createElement('div',{className:'privacy-icon'},React.createElement(Icon,{name:'key',size:'l'})),
