@@ -98,7 +98,7 @@ button,a,.view-mode,.tree-folder,.tree-file,.card-header,.top-btn,.tool-btn,.sta
     min-height:54px;
     background:var(--bg1);
     border-bottom:1px solid var(--border);
-    display:flex;align-items:center;
+    display:flex;flex-wrap:wrap;align-items:flex-start;
     padding:0 20px;gap:14px;
     flex-shrink:0;position:relative;z-index:120;
 }
@@ -128,7 +128,7 @@ button,a,.view-mode,.tree-folder,.tree-file,.card-header,.top-btn,.tool-btn,.sta
 .status-dot{display:inline-block;width:7px;height:7px;border-radius:999px;flex-shrink:0}
 
 /* ── Input row ── */
-.repo-input-group{display:flex;gap:8px;flex:1;max-width:860px;min-width:0}
+.repo-input-group{display:flex;gap:8px;flex:1 1 320px;max-width:100%;min-width:0}
 .repo-input-group>*{min-width:0}
 .repo-input{
     flex:1;padding:7px 13px;
@@ -144,7 +144,85 @@ button,a,.view-mode,.tree-folder,.tree-file,.card-header,.top-btn,.tool-btn,.sta
 .repo-input:focus{outline:none;border-color:var(--acc);box-shadow:0 0 0 3px var(--accbg)}
 
 /* ── Buttons ── */
-.topbar-actions{display:flex;gap:6px;margin-left:auto;flex-wrap:wrap;align-items:center}
+.topbar > * { min-width: 0; }
+.topbar-actions{display:flex;gap:6px;margin-left:auto;flex:1 1 260px;flex-wrap:wrap;align-items:center;justify-content:flex-end;max-width:100%;min-width:0;position:relative;}
+.topbar-search{display:flex;align-items:center;flex:0 0 auto;}
+.topbar-search .top-btn{min-width:0;}
+.topbar-menu-container{position:relative;}
+.topbar-menu{position:absolute;top:calc(100% + 8px);right:0;display:flex;flex-direction:column;gap:8px;padding:12px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--r-l);box-shadow:var(--shadow-l);min-width:220px;z-index:1300;}
+.topbar-menu-mobile{
+  position:fixed;
+  top:0;
+  right:0;
+  bottom:0;
+  left:auto;
+  box-sizing:border-box;
+  width:min(90vw,280px);
+  max-width:100vw;
+  padding:18px 16px calc(18px + env(safe-area-inset-bottom));
+  background:var(--bg2);
+  border:none;
+  border-radius:0 0 0 22px;
+  box-shadow:-16px 0 40px rgba(0,0,0,0.35);
+  z-index:1260;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+}
+.mobile-menu-backdrop{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.35);
+  z-index:1250;
+}
+.topbar-menu-mobile .menu-item{
+  width:100%;
+  justify-content:flex-start;
+  gap:10px;
+  text-align:left;
+  padding:12px 14px;
+  border-radius:var(--r-m);
+  white-space:normal;
+  word-break:break-word;
+}
+.topbar-menu-mobile .mobile-menu-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  padding-bottom:6px;
+  border-bottom:1px solid var(--border);
+}
+.topbar-menu-mobile .mobile-menu-title{
+  font-size:12px;
+  font-weight:700;
+  color:var(--t0);
+}
+.topbar-menu-mobile .mobile-panel-close{
+  width:38px;
+  height:38px;
+  border:none;
+  border-radius:var(--r-m);
+  background:var(--bg3);
+  color:var(--t2);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+}
+.topbar-menu-mobile .mobile-panel-close:hover{
+  border:1px solid var(--acc);
+  color:var(--acc);
+}
+.topbar-actions .top-btn,
+.topbar-actions .focus-mode-btn{min-width:0;flex:0 1 auto;}
+.topbar-actions .focus-mode-btn{margin:0;}
+.topbar{
+    min-height:70px;
+    align-items:center;
+}
 .top-btn{
     padding:0 14px;
     height:34px;
@@ -161,7 +239,30 @@ button,a,.view-mode,.tree-folder,.tree-file,.card-header,.top-btn,.tool-btn,.sta
     letter-spacing:0.01em;
     line-height:1;
 }
-.top-btn:hover{background:var(--bg4);border-color:var(--acc);color:var(--acc)}
+.top-btn.icon-only,.focus-mode-btn.icon-only,.chat-toggle.icon-only{width:40px;min-width:40px;padding:0;justify-content:center;}
+.top-btn.icon-only .icon,.focus-mode-btn.icon-only .icon,.chat-toggle.icon-only .icon{margin:0;}
+.top-btn:hover,.focus-mode-btn:hover,.chat-toggle:hover{background:var(--bg4);border-color:var(--acc);color:var(--acc)}
+.chat-toggle{transition:background 0.15s ease,border-color 0.15s ease,color 0.15s ease,transform 0.15s ease;}
+.chat-toggle.icon-only{background:var(--accbg);border-color:var(--acc);color:var(--acc);width:44px;height:44px;min-width:44px;padding:0;}
+.chat-toggle.icon-only:hover{background:rgba(124,106,247,0.12);}
+.focus-mode-btn{
+    padding:0 14px;
+    height:34px;
+    background:var(--bg3);
+    border:1.5px solid var(--border);
+    border-radius:var(--r-m);
+    color:var(--t1);
+    font-family:'Inter',sans-serif;
+    font-size:12px;font-weight:500;
+    cursor:pointer;
+    display:inline-flex;align-items:center;gap:7px;
+    white-space:nowrap;
+    touch-action:manipulation;
+    letter-spacing:0.01em;
+    line-height:1;
+}
+.focus-mode-btn:hover{background:var(--bg4);border-color:var(--acc);color:var(--acc)}
+.focus-mode-btn.active{background:var(--accbg);border-color:var(--acc);color:var(--acc)}
 .top-btn.primary{
     background:var(--brand-gradient);
     color:#111;
@@ -637,15 +738,28 @@ button,a,.view-mode,.tree-folder,.tree-file,.card-header,.top-btn,.tool-btn,.sta
     display:flex;align-items:center;gap:10px;
     width:100%;min-height:38px;
   }
-  .mobile-brand-row .logo{min-height:38px}
+  .mobile-brand-row .logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex:1 1 auto;
+    min-width:0;
+  }
   .mobile-brand-row .logo-mark{width:34px;height:34px;border-radius:10px}
-  .mobile-brand-row .logo-text{font-size:15px;font-weight:700}
+  .mobile-brand-row .logo-text{
+    font-size:15px;font-weight:700;
+    min-width:0;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+  }
   .mobile-brand-row .logo-subtitle{display:none}
 
   /* ── Action stack (icon buttons top-right) ── */
   .mobile-action-stack{
     display:flex;align-items:center;gap:6px;
     margin-left:auto;flex-shrink:0;
+    position:relative;
   }
   .mobile-icon-btn{
     width:36px;height:36px;min-height:36px;
@@ -739,7 +853,7 @@ button,a,.view-mode,.tree-folder,.tree-file,.card-header,.top-btn,.tool-btn,.sta
   /* ── Bottom navigation bar ── */
   .mobile-bottom-nav{
     display:grid;
-    grid-template-columns:repeat(3,minmax(0,1fr));
+    grid-template-columns:repeat(4,minmax(0,1fr));
     gap:6px;
     position:fixed;left:0;right:0;bottom:0;z-index:150;
     padding:8px 12px calc(10px + env(safe-area-inset-bottom));
@@ -780,6 +894,14 @@ button,a,.view-mode,.tree-folder,.tree-file,.card-header,.top-btn,.tool-btn,.sta
   }
   .mobile-bottom-nav .top-btn .icon{
     width:20px;height:20px;
+  }
+  .mobile-bottom-nav .top-btn.chat-btn{
+    background:linear-gradient(135deg,var(--acc),rgba(124,106,247,0.12));
+    color:var(--t0);
+  }
+  .mobile-bottom-nav .top-btn.chat-btn.active{
+    background:var(--accbg);
+    color:var(--acc);
   }
 
   /* ── Canvas bottom padding for nav ── */
@@ -857,7 +979,7 @@ button,a,.view-mode,.tree-folder,.tree-file,.card-header,.top-btn,.tool-btn,.sta
   }
   .legend{
     top:auto;
-    bottom:calc(80px + env(safe-area-inset-bottom));
+    bottom:calc(140px + env(safe-area-inset-bottom));
     right:12px;left:auto;
     max-width:calc(100vw - 80px);
   }
@@ -990,7 +1112,7 @@ button,a,.view-mode,.tree-folder,.tree-file,.card-header,.top-btn,.tool-btn,.sta
   .mobile-secondary-row .refresh-btn,
   .mobile-secondary-row .reset-btn{padding:0 9px}
   .canvas-toolbar{bottom:calc(76px + env(safe-area-inset-bottom))}
-  .legend{bottom:calc(76px + env(safe-area-inset-bottom))}
+  .legend{bottom:calc(140px + env(safe-area-inset-bottom))}
   .mobile-bottom-nav .top-btn{
     height:48px;min-height:48px;
     font-size:8px;
@@ -1269,6 +1391,101 @@ button,a,.view-mode,.tree-folder,.tree-file,.card-header,.top-btn,.tool-btn,.sta
   font-size:9px;font-weight:700;
   padding:2px 8px;border-radius:var(--r-full);
   text-transform:uppercase;letter-spacing:0.05em;
+}
+.summary-card{
+  background:var(--bg0);
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:14px 16px 12px;
+  margin-bottom:16px;
+}
+.summary-card-title{
+  font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--t0);margin-bottom:8px;
+}
+.summary-card-subtitle{
+  font-size:11px;color:var(--t2);line-height:1.5;margin-bottom:14px;
+}
+.summary-metrics{
+  display:flex;gap:12px;justify-content:space-between;flex-wrap:wrap;margin-bottom:12px;
+}
+.summary-metric{
+  flex:1 1 92px;min-width:92px;display:flex;flex-direction:column;gap:4px;align-items:flex-start;
+}
+.summary-metric-value{
+  font-size:18px;font-weight:700;line-height:1.1;
+}
+.summary-metric-label{
+  font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:0.08em;
+}
+.summary-card-note{
+  font-size:11px;color:var(--t1);line-height:1.5;padding:0 2px;
+}
+
+.chat-widget{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  width:320px;
+  max-width:calc(100vw - 32px);
+  z-index:1200;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  font-family:'Inter',system-ui,sans-serif;
+}
+.chat-toggle{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  padding:10px 14px;
+  border-radius:999px;
+  background:var(--brand-gradient);
+  color:#111;
+  box-shadow:var(--glow);
+  border:none;
+  cursor:pointer;
+  font-weight:700;
+}
+.chat-panel{
+  width:100%;
+  max-width:320px;
+  background:var(--bg1);
+  border:1.5px solid var(--border);
+  border-radius:20px;
+  box-shadow:var(--shadow-l);
+  overflow:hidden;
+  margin-top:10px;
+}
+.chat-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:12px 14px;
+  background:var(--bg2);
+  border-bottom:1px solid var(--border2);
+}
+.chat-title{font-size:12px;font-weight:700;color:var(--t0);}
+.chat-close{background:none;border:none;color:var(--t3);font-size:16px;cursor:pointer;}
+.chat-title-group{display:flex;flex-direction:column;gap:2px;}
+.chat-subtitle{font-size:11px;color:var(--t2);line-height:1.3;}
+.chat-history{display:flex;flex-direction:column;gap:10px;padding:12px;max-height:260px;overflow-y:auto;}
+.chat-bubble{padding:10px 12px;border-radius:16px;line-height:1.4;white-space:pre-wrap;word-break:break-word;}
+.chat-bubble.user{align-self:flex-end;background:var(--acc);color:#111;}
+.chat-bubble.bot{align-self:flex-start;background:var(--bg2);color:var(--t0);}
+.chat-input-row{display:flex;gap:8px;padding:12px;border-top:1px solid var(--border2);background:var(--bg1);}
+.chat-input{flex:1;padding:10px 12px;border:1.5px solid var(--border);border-radius:999px;background:var(--bg0);color:var(--t0);outline:none;}
+.chat-send{padding:0 14px;border:none;border-radius:999px;background:var(--acc);color:#111;cursor:pointer;font-weight:700;}
+.chat-hint{font-size:10px;color:var(--t3);padding:0 12px 10px;}
+.chat-pills{display:flex;flex-wrap:wrap;gap:8px;padding:0 12px 12px;}
+.chat-pill{border:none;cursor:pointer;padding:8px 10px;border-radius:999px;background:var(--bg3);color:var(--t1);font-size:11px;font-weight:600;white-space:normal;flex:1 1 140px;min-width:0;max-width:100%;text-align:center;}
+.chat-pill:hover{background:var(--bg4);color:var(--t0);}
+
+@media (max-width:980px){
+  .chat-widget{right:auto;left:50%;transform:translateX(-50%);top:auto;bottom:calc(94px + env(safe-area-inset-bottom));width:min(92vw,320px);max-width:92vw;}
+  .chat-widget .chat-toggle{display:none;}
+  .chat-panel{max-height:75vh;}
+  .canvas-toolbar{bottom:calc(140px + env(safe-area-inset-bottom));}
 }
 
     </style>
@@ -4382,6 +4599,12 @@ function Icon(props){
         case 'note':
             children=[React.createElement('path',Object.assign({key:'p1',d:'M6 3h9l4 4v14H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z'},common)),React.createElement('path',Object.assign({key:'p2',d:'M15 3v4h4'},common)),React.createElement('path',Object.assign({key:'p3',d:'M8 12h8M8 16h6'},common))];
             break;
+        case 'chat':
+            children=[React.createElement('path',Object.assign({key:'p1',d:'M4 5h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H8l-4 4V7a2 2 0 0 1 2-2z'},common)),React.createElement('path',Object.assign({key:'p2',d:'M8 11h8M8 15h6'},common))];
+            break;
+        case 'menu':
+            children=[React.createElement('path',Object.assign({key:'p1',d:'M3 7h18M3 12h18M3 17h18'},common))];
+            break;
         case 'code':
             children=[React.createElement('polyline',Object.assign({key:'p1',points:'8 8 4 12 8 16'},common)),React.createElement('polyline',Object.assign({key:'p2',points:'16 8 20 12 16 16'},common)),React.createElement('path',Object.assign({key:'p3',d:'M13 6 11 18'},common))];
             break;
@@ -4557,6 +4780,9 @@ function App(){
     var _z=useState(false),showUnused=_z[0],setShowUnused=_z[1];
     var _aa=useState({spacing:200,linkDist:70,viewMode:'force',vizType:'graph',showLabels:true,curvedLinks:true}),graphConfig=_aa[0],setGraphConfig=_aa[1];
     var _ab=useState(false),showGraphConfig=_ab[0],setShowGraphConfig=_ab[1];
+    var _ad=useState(false),chatOpen=_ad[0],setChatOpen=_ad[1];
+    var _ae=useState(''),chatInput=_ae[0],setChatInput=_ae[1];
+    var _af=useState([{from:'bot',text:'Hello! Ask me about repo structure, file counts, architecture risks, or the largest files in the current project.'}]),chatHistory=_af[0],setChatHistory=_af[1];
     var _ac=useState(260),sidebarWidth=_ac[0],setSidebarWidth=_ac[1];
     var _ad=useState(360),rightPanelWidth=_ad[0],setRightPanelWidth=_ad[1];
     var _ae=useState(true),legendCollapsed=_ae[0],setLegendCollapsed=_ae[1];
@@ -4574,6 +4800,7 @@ function App(){
     var _sq=useState(false),showSearch=_sq[0],setShowSearch=_sq[1];
     var _sq2=useState(''),searchQuery=_sq2[0],setSearchQuery=_sq2[1];
     var _sq3=useState(0),searchActiveIdx=_sq3[0],setSearchActiveIdx=_sq3[1];
+    var _sq4=useState(false),menuOpen=_sq4[0],setMenuOpen=_sq4[1];
     var _fm=useState(false),focusMode=_fm[0],setFocusMode=_fm[1];
     var _st=useState(function(){try{return JSON.parse(localStorage.getItem('cf_starred')||'[]');}catch(e){return[];}}),starredPaths=_st[0],setStarredPaths=_st[1];
     var isMobile=viewportWidth<=980;
@@ -4591,6 +4818,7 @@ function App(){
     var nodesRef=useRef(null);
     var linksRef=useRef(null);
     var selectFileRef=useRef(null);
+    var chatHistoryRef=useRef(null);
     var zipInputRef=useRef(null);
     var zipArchiveRef=useRef(null);
     var zipFileRef=useRef(null);
@@ -4610,6 +4838,11 @@ function App(){
     },[]);
     // Save starred to localStorage
     useEffect(function(){try{localStorage.setItem('cf_starred',JSON.stringify(starredPaths));}catch(e){};},[starredPaths]);
+    useEffect(function(){
+        if(chatOpen && chatHistoryRef.current){
+            chatHistoryRef.current.scrollTop = chatHistoryRef.current.scrollHeight;
+        }
+    },[chatHistory,chatOpen]);
     function toggleStar(path){setStarredPaths(function(prev){return prev.includes(path)?prev.filter(function(p){return p!==path;}):prev.concat([path]);});}
 
     // ── Drag-drop state ──
@@ -4827,6 +5060,137 @@ function App(){
 
     function toggleMobilePanel(panel){
         setMobilePanel(function(prev){return prev===panel?null:panel;});
+    }
+
+    function findRepoFile(query){
+        if(!data||!data.files)return null;
+        var matches=(query||'').match(/[\w\-.\/]+\.[a-zA-Z0-9]+/g)||[];
+        if(!matches.length)return null;
+        var needle=matches[matches.length-1].toLowerCase();
+        var exact=data.files.find(function(f){return f.path.toLowerCase()===needle||f.path.toLowerCase().endsWith('/'+needle);});
+        if(exact)return exact;
+        var partial=data.files.filter(function(f){return f.path.toLowerCase().endsWith('/'+needle)||f.path.toLowerCase().indexOf(needle)!==-1;});
+        return partial.length>0?partial[0]:null;
+    }
+
+    function getChatAnswer(question){
+        var text=(question||'').trim();
+        var q=text.toLowerCase();
+        var randomChoice=function(arr){return arr[Math.floor(Math.random()*arr.length)];};
+        var genericHelp=[
+            'Ask me for a repo summary, the largest file, file counts, or what risks I found.',
+            'Try: "Give me an overview", "What are the main risks?", or "How many functions are in the repo?"',
+            'I can surface architecture issues, risk hotspots, and file-level stats once a repository is loaded.'
+        ];
+        var noDataReplies=[
+            'I need a repository, folder, or ZIP loaded before I can answer repo analysis questions.',
+            'Please analyze a project first. Then I can tell you about files, functions, architecture, and risk.',
+            'No repo data is loaded yet. Use the repo URL or upload a ZIP/folder and I’ll summarize it.'
+        ];
+        var fileNotFoundReplies=[
+            'I could not find that file in the current analysis. Try a different filename or load the correct repo.',
+            'That file is not in the loaded repository. I can only answer questions about files I can see.',
+            'No match for that file was found. Double-check the filename or use a more general repo question.'
+        ];
+        if(!text)return randomChoice(genericHelp);
+        if(!data||!data.files||!data.files.length){
+            return randomChoice(noDataReplies);
+        }
+        var summary=repoSummary||{};
+        var totalFiles=data.files.length;
+        var totalFunctions=data.files.reduce(function(sum,f){return sum+((f.functions&&f.functions.length)||0);},0);
+        var totalLoc=data.files.reduce(function(sum,f){return sum+(f.lines||0);},0);
+        var fileByFunctions=data.files.slice().sort(function(a,b){return ((b.functions&&b.functions.length)||0)-((a.functions&&a.functions.length)||0);});
+        var fileByLines=data.files.slice().sort(function(a,b){return (b.lines||0)-(a.lines||0);});
+        var largest=fileByLines[0]||null;
+        var mostFn=fileByFunctions[0]||null;
+        var foundFile=findRepoFile(q);
+        var highSec=(data.securityIssues?data.securityIssues.filter(function(i){return i.severity==='high';}).length:0);
+        if(/what.*is.*(this|repo)|tell me about|describe.*repo|give me an overview|overview/.test(q)){
+            var intro = summary.type ? 'This appears to be a '+summary.type+'. ' : '';
+            var projectText = summary.desc ? summary.desc+'. ' : '';
+            var archText = summary.archDesc ? summary.archDesc+'. ' : '';
+            var scaleText = summary.scaleDesc ? summary.scaleDesc+'. ' : '';
+            var testText = typeof summary.hasTests!=='undefined' ? (summary.hasTests ? 'Tests are present.' : 'No tests were detected — consider adding coverage.') : '';
+            return intro + projectText + archText + scaleText + testText;
+        }
+        if(/risk|issue|problem|danger|vulner|security/.test(q)){
+            if(data.issues.length===0 && highSec===0){
+                return 'I did not find any major architecture issues or high-severity security risks in the current analysis.';
+            }
+            var riskText='I found '+data.issues.length+' architecture issue'+(data.issues.length!==1?'s':'')+' and '+highSec+' high-severity security finding'+(highSec!==1?'s':'')+'.';
+            return riskText + ' Open the Risk panel for the full details.';
+        }
+        if(/how many.*function/.test(q)||/function.*count/.test(q)||(/functions/.test(q)&&/repo|project|codebase/.test(q))){
+            return 'This codebase contains '+totalFunctions+' functions across '+totalFiles+' files.';
+        }
+        if(/how many.*file/.test(q)||/file.*count/.test(q)||(/files/.test(q)&&/repo|project|codebase/.test(q))){
+            return 'This repository contains '+totalFiles+' analyzable files and about '+totalLoc.toLocaleString()+' lines of code.';
+        }
+        if(/largest|longest|biggest/.test(q)){
+            if(largest){
+                return 'The largest file is '+largest.path+' with '+(largest.lines||0)+' lines and '+((largest.functions&&largest.functions.length)||0)+' functions.';
+            }
+            return 'I could not determine the largest file yet.';
+        }
+        if(/most.*function/.test(q)||/function heavy/.test(q)||/highest.*function/.test(q)||/most.*functions/.test(q)){
+            if(mostFn){
+                return 'The file with the most functions is '+mostFn.path+' with '+((mostFn.functions&&mostFn.functions.length)||0)+' functions.';
+            }
+            return 'I could not determine the top function file yet.';
+        }
+        if(/language/.test(q)||/languages/.test(q)||/tech stack/.test(q)){
+            if(data.stats&&data.stats.languages&&data.stats.languages.length){
+                return 'Top languages: '+data.stats.languages.slice(0,5).map(function(l){return l.ext+' ('+l.pct+'%)';}).join(', ')+'.';
+            }
+            return 'Language data is not available for this repository.';
+        }
+        if(foundFile){
+            if(/function/.test(q)||/functions/.test(q)){
+                return 'File '+foundFile.path+' contains '+((foundFile.functions&&foundFile.functions.length)||0)+' function'+(((foundFile.functions&&foundFile.functions.length)||0)!==1?'s':'')+'.';
+            }
+            if(/line/.test(q)||/largest|size|long/.test(q)){
+                return 'File '+foundFile.path+' has '+(foundFile.lines||0)+' lines and '+((foundFile.functions&&foundFile.functions.length)||0)+' functions.';
+            }
+            if(/layer/.test(q)||/folder/.test(q)||/module/.test(q)){
+                return 'File '+foundFile.path+' is classified in the '+(foundFile.layer||'unknown')+' layer.';
+            }
+            return 'File '+foundFile.path+' has '+(foundFile.lines||0)+' lines and '+((foundFile.functions&&foundFile.functions.length)||0)+' functions.';
+        }
+        if(/what.*can you do/.test(q)||(/help/.test(q)&&!/how many/.test(q))){
+            return 'I can summarize the repository, count files and functions, find the largest file, and surface architecture or security risks.';
+        }
+        if(/file.*not.*found|not.*found|cannot find|does not exist/.test(q)){
+            return randomChoice(fileNotFoundReplies);
+        }
+        return randomChoice(genericHelp);
+    }
+
+    function scrollChatHistoryToBottom(){
+        setTimeout(function(){
+            if(chatHistoryRef.current){
+                chatHistoryRef.current.scrollTop=chatHistoryRef.current.scrollHeight;
+            }
+        },50);
+    }
+
+    function submitChat(){
+        if(!chatInput.trim())return;
+        var question=chatInput.trim();
+        var answer=getChatAnswer(question);
+        setChatHistory(function(prev){return prev.concat([{from:'user',text:question},{from:'bot',text:answer}]);});
+        setChatInput('');
+        setChatOpen(true);
+        scrollChatHistoryToBottom();
+    }
+
+    function sendChatSuggestion(question){
+        if(!question||!question.trim())return;
+        var answer=getChatAnswer(question);
+        setChatHistory(function(prev){return prev.concat([{from:'user',text:question},{from:'bot',text:answer}]);});
+        setChatInput('');
+        setChatOpen(true);
+        scrollChatHistoryToBottom();
     }
 
     function analyze(){
@@ -6474,14 +6838,24 @@ function App(){
     // Step 7 – summary metrics
     var summaryMetrics=useMemo(function(){
         if(!data)return null;
-        var issues=data.issues.length;
-        var sec=data.stats.security||0;
-        var complexity='low';
+        var architectureIssues=data.issues.length;
+        var highSecurity=(data.securityIssues||[]).filter(function(i){return i.severity==='high';}).length;
+        var totalFindings=architectureIssues + highSecurity;
         var avgComplexity=(data.files.reduce(function(s,f){return s+(f.complexity?f.complexity.score:0);},0)/(data.files.length||1));
-        if(avgComplexity>15)complexity='high';
-        else if(avgComplexity>6)complexity='medium';
-        var risk=sec>5||issues>4?'high':sec>2||issues>2?'medium':'low';
-        return{complexity:complexity,risk:risk,issues:issues+sec};
+        var complexityLabel='Low';
+        if(avgComplexity>15)complexityLabel='High';
+        else if(avgComplexity>6)complexityLabel='Medium';
+        var riskLabel='Low';
+        if(highSecurity>=2||totalFindings>=6||avgComplexity>18)riskLabel='High';
+        else if(highSecurity>=1||totalFindings>=3||avgComplexity>10)riskLabel='Medium';
+        return{
+            complexityLabel:complexityLabel,
+            complexityScore:avgComplexity,
+            riskLabel:riskLabel,
+            findings:totalFindings,
+            architectureIssues:architectureIssues,
+            highSecurity:highSecurity
+        };
     },[data]);
 
     // ── Repo Summary — pure client-side intelligence ──
@@ -6634,10 +7008,21 @@ function App(){
                         )
                     ),
                     React.createElement('div',{className:'mobile-action-stack'},
-                        data&&!localSourceKind&&React.createElement('button',{className:'top-btn mobile-icon-btn','aria-label':'Analyze Pull Request',title:'Pull Request',onClick:function(){setShowPR(true);},type:'button'},React.createElement(Icon,{name:'pull-request',size:'m'})),
-                        data&&React.createElement('button',{className:'top-btn mobile-icon-btn','aria-label':'Export analysis',title:'Export',onClick:function(){setShowExport(true);},type:'button'},React.createElement(Icon,{name:'export',size:'m'})),
-                        data&&!localSourceKind&&React.createElement('button',{className:'top-btn mobile-icon-btn','aria-label':'Copy share link',title:'Share',onClick:copyLink,type:'button'},React.createElement(Icon,{name:'share',size:'m'})),
-                        React.createElement('button',{className:'top-btn mobile-icon-btn','aria-label':'Toggle theme',title:'Theme',onClick:function(){setTheme(function(t){return t==='dark'?'light':'dark';});},type:'button'},React.createElement(Icon,{name:theme==='dark'?'sun':'moon',size:'m'}))
+                        React.createElement('button',{className:'top-btn mobile-icon-btn','aria-label':'Open actions menu',title:'Menu',onClick:function(){setMenuOpen(function(v){return !v;});},type:'button'},React.createElement(Icon,{name:'menu',size:'m'}))
+                    )
+                ),
+                menuOpen&&React.createElement(React.Fragment,null,
+                    React.createElement('div',{className:'mobile-menu-backdrop',onClick:function(){setMenuOpen(false);}}),
+                    React.createElement('div',{className:'topbar-menu topbar-menu-mobile'},
+                        React.createElement('div',{className:'mobile-menu-header'},
+                            React.createElement('span',{className:'mobile-menu-title'},'Actions'),
+                            React.createElement('button',{type:'button',className:'mobile-panel-close',title:'Close menu','aria-label':'Close menu',onClick:function(){setMenuOpen(false);}},'×')
+                        ),
+                        React.createElement('button',{type:'button',className:'top-btn menu-item','aria-label':'Toggle focus mode','onClick':function(){setFocusMode(function(v){return !v;});setMenuOpen(false);}},React.createElement(Icon,{name:'target',size:'s'}),'Focus'),
+                        data&&!localSourceKind&&React.createElement('button',{type:'button',className:'top-btn menu-item','aria-label':'Analyze Pull Request','onClick':function(){setShowPR(true);setMenuOpen(false);}},React.createElement(Icon,{name:'pull-request',size:'s'}),'PR'),
+                        data&&React.createElement('button',{type:'button',className:'top-btn menu-item','aria-label':'Export analysis','onClick':function(){setShowExport(true);setMenuOpen(false);}},React.createElement(Icon,{name:'export',size:'s'}),'Export'),
+                        data&&!localSourceKind&&React.createElement('button',{type:'button',className:'top-btn menu-item','aria-label':'Copy share link','onClick':function(){copyLink();setMenuOpen(false);}},React.createElement(Icon,{name:'share',size:'s'}),'Share'),
+                        React.createElement('button',{type:'button',className:'top-btn menu-item','aria-label':'Toggle theme','onClick':function(){setTheme(function(t){return t==='dark'?'light':'dark';});setMenuOpen(false);}},React.createElement(Icon,{name:theme==='dark'?'sun':'moon',size:'s'}),theme==='dark'?'Light':'Dark')
                     )
                 ),
                 React.createElement('div',{className:'mobile-source-controls'},
@@ -6676,14 +7061,7 @@ function App(){
                             React.createElement(Icon,{name:'archive',size:'m'}),
                             'ZIP'
                         ),
-                        data&&React.createElement('button',{className:'refresh-btn','aria-label':'Refresh analysis',onClick:refreshAnalysis,disabled:loading,title:'Refresh Analysis',type:'button'},
-                            React.createElement(Icon,{name:'refresh',size:'m'}),
-                            'Refresh'
-                        ),
-                        data&&React.createElement('button',{className:'reset-btn','aria-label':'Reset analysis',onClick:resetAnalysis,title:'Clear & Reset',type:'button'},
-                            React.createElement(Icon,{name:'close',size:'m'}),
-                            'Reset'
-                        )
+
                     )
                 )
             ),
@@ -6703,6 +7081,9 @@ function App(){
                     React.createElement('span',{className:'logo-text'},'DecodeTheCode'),
                     React.createElement('span',{className:'logo-subtitle'},'Architecture Intelligence')
                 )
+            ),
+            React.createElement('div',{className:'topbar-search'},
+                React.createElement('button',{type:'button',className:'top-btn icon-only','aria-label':'Search files and functions (Cmd+K)',onClick:function(){setShowSearch(true);setSearchQuery('');},title:'Search (⌘K)'},React.createElement(Icon,{name:'search',size:'m'}))
             ),
             React.createElement('div',{className:'repo-input-group'},
                 React.createElement('input',{className:'repo-input','aria-label':'Repository URL',placeholder:'owner/repo or GitHub URL',value:repoUrl,onChange:function(e){setRepoUrl(e.target.value);},onKeyDown:function(e){if(e.key==='Enter'&&!loading)analyze();}}),
@@ -6758,12 +7139,16 @@ function App(){
                 )
             ),
             React.createElement('div',{className:'topbar-actions'},
-                React.createElement('button',{className:'top-btn','aria-label':'Search files and functions (Cmd+K)',onClick:function(){setShowSearch(true);setSearchQuery('');},title:'Search (⌘K)'},React.createElement(Icon,{name:'search',size:'m'}),'Search'),
-                data&&React.createElement('button',{className:'focus-mode-btn'+(focusMode?' active':''),'aria-label':'Toggle focus mode',onClick:function(){setFocusMode(function(v){return !v;});},title:'Focus Mode'},React.createElement(Icon,{name:'target',size:'m'}),focusMode?'Exit Focus':'Focus'),
-                React.createElement('button',{className:'top-btn','aria-label':'Analyze Pull Request',onClick:function(){setShowPR(true);},disabled:!data||!!localSourceKind},React.createElement(Icon,{name:'pull-request',size:'m'}),'PR'),
-                React.createElement('button',{className:'top-btn','aria-label':'Export analysis',onClick:function(){setShowExport(true);},disabled:!data},React.createElement(Icon,{name:'export',size:'m'}),'Export'),
-                React.createElement('button',{className:'top-btn','aria-label':'Copy share link',onClick:copyLink,disabled:!data||!!localSourceKind},React.createElement(Icon,{name:'share',size:'m'}),'Share'),
-                React.createElement('button',{className:'top-btn','aria-label':'Toggle theme',onClick:function(){setTheme(function(t){return t==='dark'?'light':'dark';});}},React.createElement(Icon,{name:theme==='dark'?'sun':'moon',size:'m'}),theme==='dark'?'Light':'Dark')
+                React.createElement('div',{className:'topbar-menu-container'},
+                    React.createElement('button',{type:'button',className:'top-btn icon-only topbar-menu-toggle','aria-label':'Open actions menu','title':'Menu','onClick':function(){setMenuOpen(function(v){return !v;});}},React.createElement(Icon,{name:'menu',size:'m'})),
+                    menuOpen&&React.createElement('div',{className:'topbar-menu'},
+                        React.createElement('button',{type:'button',className:'top-btn menu-item','aria-label':'Toggle focus mode','onClick':function(){setFocusMode(function(v){return !v;});setMenuOpen(false);}},React.createElement(Icon,{name:'target',size:'s'}),focusMode?'Exit Focus':'Focus'),
+                        data&&!localSourceKind&&React.createElement('button',{type:'button',className:'top-btn menu-item','aria-label':'Analyze Pull Request','onClick':function(){setShowPR(true);setMenuOpen(false);}},React.createElement(Icon,{name:'pull-request',size:'s'}),'PR'),
+                        data&&React.createElement('button',{type:'button',className:'top-btn menu-item','aria-label':'Export analysis','onClick':function(){setShowExport(true);setMenuOpen(false);}},React.createElement(Icon,{name:'export',size:'s'}),'Export'),
+                        data&&!localSourceKind&&React.createElement('button',{type:'button',className:'top-btn menu-item','aria-label':'Copy share link','onClick':function(){copyLink();setMenuOpen(false);}},React.createElement(Icon,{name:'share',size:'s'}),'Share'),
+                        React.createElement('button',{type:'button',className:'top-btn menu-item','aria-label':'Toggle theme','onClick':function(){setTheme(function(t){return t==='dark'?'light':'dark';});setMenuOpen(false);}},React.createElement(Icon,{name:theme==='dark'?'sun':'moon',size:'s'}),theme==='dark'?'Light':'Dark')
+                    )
+                )
             )
         ),
         React.createElement('div',{className:'main'},
@@ -6986,6 +7371,7 @@ function App(){
                     React.createElement('div',{className:'panel-tabs'},
                         React.createElement('button',{className:'panel-tab'+(rightTab==='details'?' active':''),onClick:function(){setRightTab('details');setDrillDown(null);}},selected?iconLabel('file','FILE'):iconLabel('search','OVERVIEW')),
                         React.createElement('button',{className:'panel-tab'+(rightTab==='patterns'?' active':''),onClick:function(){setRightTab('patterns');setDrillDown(null);}},iconLabel('puzzle','INSIGHTS'),' ',React.createElement('span',{className:'badge badge-default'},data.patterns.length)),
+                        React.createElement('button',{className:'panel-tab'+(rightTab==='issues'?' active':''),onClick:function(){setRightTab('issues');setDrillDown(null);}},iconLabel('warning','ISSUES'),React.createElement('span',{className:'view-mode-badge',style:{marginLeft:4}},data.issues.length)),
                         React.createElement('button',{className:'panel-tab'+(rightTab==='security'?' active':''),onClick:function(){setRightTab('security');setDrillDown(null);}},iconLabel('security','RISK'),data.stats.security>0&&React.createElement('span',{className:'view-mode-badge',style:{marginLeft:4}},data.stats.security)),
                         React.createElement('button',{className:'panel-tab'+(rightTab==='suggestions'?' active':''),onClick:function(){setRightTab('suggestions');setDrillDown(null);}},iconLabel('action','ACTIONS'),data.suggestions&&data.suggestions.length>0&&React.createElement('span',{className:'view-mode-badge',style:{marginLeft:4}},data.suggestions.length))
                     ),
@@ -7224,20 +7610,28 @@ function App(){
                             ),
                             summaryMetrics&&React.createElement('div',{className:'summary-card'},
                                 React.createElement('div',{className:'summary-card-title'},'Quick Summary'),
+                                React.createElement('div',{className:'summary-card-subtitle'},'Snapshot of repo health, risk, and maintenance indicators.'),
                                 React.createElement('div',{className:'summary-metrics'},
                                     React.createElement('div',{className:'summary-metric'},
-                                        React.createElement('div',{className:'summary-metric-value',style:{color:summaryMetrics.complexity==='high'?'var(--red)':summaryMetrics.complexity==='medium'?'var(--orange)':'var(--green)'}},summaryMetrics.complexity.toUpperCase()),
-                                        React.createElement('div',{className:'summary-metric-label'},'Complexity')
+                                        React.createElement('div',{className:'summary-metric-value',style:{color:summaryMetrics.complexityLabel==='High'?'var(--red)':summaryMetrics.complexityLabel==='Medium'?'var(--orange)':'var(--green)'}},summaryMetrics.complexityScore.toFixed(1)),
+                                        React.createElement('div',{className:'summary-metric-label'},'Avg complexity')
                                     ),
                                     React.createElement('div',{className:'summary-metric'},
-                                        React.createElement('div',{className:'summary-metric-value',style:{color:summaryMetrics.risk==='high'?'var(--red)':summaryMetrics.risk==='medium'?'var(--orange)':'var(--green)'}},summaryMetrics.risk.toUpperCase()),
+                                        React.createElement('div',{className:'summary-metric-value',style:{color:summaryMetrics.riskLabel==='High'?'var(--red)':summaryMetrics.riskLabel==='Medium'?'var(--orange)':'var(--green)'}},summaryMetrics.riskLabel.toUpperCase()),
                                         React.createElement('div',{className:'summary-metric-label'},'Risk')
                                     ),
                                     React.createElement('div',{className:'summary-metric'},
-                                        React.createElement('div',{className:'summary-metric-value',style:{color:summaryMetrics.issues>4?'var(--red)':summaryMetrics.issues>1?'var(--orange)':'var(--green)'}},summaryMetrics.issues),
-                                        React.createElement('div',{className:'summary-metric-label'},'Issues')
+                                        React.createElement('div',{className:'summary-metric-value',style:{color:summaryMetrics.findings>4?'var(--red)':summaryMetrics.findings>1?'var(--orange)':'var(--green)'}},summaryMetrics.findings),
+                                        React.createElement('div',{className:'summary-metric-label'},'Findings')
                                     )
-                                )
+                                ),
+                                React.createElement('div',{className:'summary-card-note'},
+                                summaryMetrics.riskLabel==='High'
+                                    ? 'High risk: '+summaryMetrics.findings+' findings detected, including '+summaryMetrics.highSecurity+' critical security issue'+(summaryMetrics.highSecurity!==1?'s':'')+'.'
+                                    : summaryMetrics.riskLabel==='Medium'
+                                        ? 'Medium risk: '+summaryMetrics.findings+' findings found and average complexity '+summaryMetrics.complexityScore.toFixed(1)+'.'
+                                        : 'Low risk: '+summaryMetrics.findings+' findings and average complexity '+summaryMetrics.complexityScore.toFixed(1)+'.'
+                            )
                             ),
                             React.createElement('div',{style:{marginBottom:12}},
                                 React.createElement('div',{style:{fontSize:9,fontWeight:600,color:'var(--t3)',textTransform:'uppercase',letterSpacing:'0.08em',marginBottom:8}},'Insights'),
@@ -7268,6 +7662,18 @@ function App(){
                                 ),
                                 React.createElement('div',{className:'pattern-desc'},p.desc),
                                 React.createElement('div',{style:{fontSize:9,color:'var(--acc)',marginTop:6}},'Click for details (',p.files.length,' files) →')
+                            );})
+                        ),
+                        rightTab==='issues'&&React.createElement(React.Fragment,null,
+                            React.createElement('div',{style:{fontSize:12,fontWeight:600,marginBottom:12}},React.createElement(Icon,{name:'warning',size:'m'}),' Architecture Issues'),
+                            data.issues.length===0?React.createElement('div',{style:{textAlign:'center',padding:20,color:'var(--t3)'}},React.createElement(Icon,{name:'spark',size:'xxl',className:'empty-icon'}),React.createElement('div',null,'No architecture issues found'),React.createElement('div',{style:{fontSize:10,marginTop:8}},'Your repository appears clean from architectural diagnostics.')):
+                            data.issues.map(function(issue,i){return React.createElement('div',{key:i,className:'security-item '+(issue.type==='critical'?'high':'medium'),style:{cursor:'pointer'},onClick:function(){setDrillDown({type:'issue',data:issue});}},
+                                React.createElement('div',{className:'security-header'},
+                                    React.createElement(StatusDot,{color:issue.type==='critical'?'var(--red)':'var(--orange)'}),
+                                    React.createElement('span',{className:'security-title'},issue.title)
+                                ),
+                                React.createElement('div',{className:'security-desc'},issue.desc),
+                                React.createElement('div',{style:{fontSize:9,color:'var(--acc)',marginTop:6}},'Click for details (',issue.items?issue.items.length:0,' items) →')
                             );})
                         ),
                         rightTab==='security'&&React.createElement(React.Fragment,null,
@@ -7517,6 +7923,10 @@ function App(){
             React.createElement('button',{className:'top-btn'+(mobilePanel==='details'?' active':''),'aria-label':'Open insights panel',onClick:function(){toggleMobilePanel('details');},disabled:!data,type:'button'},
                 React.createElement(Icon,{name:selected?'file':'layout',size:'m'}),
                 selected?'Inspector':'Insights'
+            ),
+            React.createElement('button',{className:'top-btn chat-btn'+(chatOpen?' active':''),'aria-label':'Open repo assistant',onClick:function(){setChatOpen(function(v){return !v;});},type:'button'},
+                React.createElement(Icon,{name:'chat',size:'m'}),
+                'Chat'
             )
         ),
         drillDown&&React.createElement('div',{className:'modal-overlay',onClick:function(){setDrillDown(null);}},
@@ -7808,6 +8218,31 @@ function App(){
                             );
                         })
                     ):null
+                )
+            )
+        ),
+        React.createElement('div',{className:'chat-widget'},
+            React.createElement('button',{className:'chat-toggle icon-only',type:'button',title:'AI Assistant','aria-label':'Toggle assistant','onClick':function(){setChatOpen(function(v){return !v;});}},React.createElement(Icon,{name:'note',size:'m'})),
+            chatOpen&&React.createElement('div',{className:'chat-panel'},
+                React.createElement('div',{className:'chat-header'},
+                    React.createElement('div',{className:'chat-title-group'},
+                        React.createElement('div',{className:'chat-title'},'Repo Assistant'),
+                        React.createElement('div',{className:'chat-subtitle'},'Ask about repo health, architecture, risk signals, or file-level stats.')
+                    ),
+                    React.createElement('button',{className:'chat-close',type:'button',onClick:function(){setChatOpen(false);}},'×')
+                ),
+                React.createElement('div',{className:'chat-history',ref:chatHistoryRef},chatHistory.map(function(msg,i){return React.createElement('div',{key:i,className:'chat-bubble '+(msg.from==='user'?'user':'bot')},msg.text);})),
+                React.createElement('div',{className:'chat-hint'},'Ask about repo overview, architecture risk, or file stats. Try one of the quick prompts below.'),
+                React.createElement('div',{className:'chat-pills'},
+                    React.createElement('button',{type:'button',className:'chat-pill',onClick:function(){sendChatSuggestion('Give me an overview of this repo.');}},'Give me an overview'),
+                    React.createElement('button',{type:'button',className:'chat-pill',onClick:function(){sendChatSuggestion('What are the main risks in this repo?');}},'What are the main risks?'),
+                    React.createElement('button',{type:'button',className:'chat-pill',onClick:function(){sendChatSuggestion('How many functions are in the repo?');}},'How many functions are in the repo?'),
+                    React.createElement('button',{type:'button',className:'chat-pill',onClick:function(){sendChatSuggestion('What is the largest file?');}},'What is the largest file?'),
+                    React.createElement('button',{type:'button',className:'chat-pill',onClick:function(){sendChatSuggestion('How many files are there?');}},'How many files are there?')
+                ),
+                React.createElement('div',{className:'chat-input-row'},
+                    React.createElement('input',{className:'chat-input',placeholder:'Ask about the repo...',value:chatInput,onChange:function(e){setChatInput(e.target.value);},onKeyDown:function(e){if(e.key==='Enter'){e.preventDefault();submitChat();}}}),
+                    React.createElement('button',{className:'chat-send',type:'button',onClick:submitChat},'Send')
                 )
             )
         ),
